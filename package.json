@@ -11,7 +11,8 @@
     "lint": "eslint ./src/",
     "lint:fix": "eslint ./src/ --fix",
     "prepare": "husky install",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "heroku-prepare": ""
   },
   "repository": {
     "type": "git",
