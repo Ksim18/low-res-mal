@@ -8,6 +8,6 @@ const pgPool = (config: pgConfig) =>
     database: config.name,
     password: config.pass!,
     port: config.port,
-    ssl: true
+    ssl: {rejectUnauthorized: false}
   });
 export default pgPool;
