@@ -10,11 +10,12 @@
     "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
     "lint": "eslint ./src/",
     "lint:fix": "eslint ./src/ --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git"
+    "url": "https://github.com/AlexTheTrashGolem/low-res-mal.git"
   },
   "author": "",
   "license": "ISC",
