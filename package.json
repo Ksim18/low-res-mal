@@ -10,7 +10,7 @@
     "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
     "lint": "eslint ./src/",
     "lint:fix": "eslint ./src/ --fix",
-    "prepare": "husky install",
+    "prepare": "cd .. && husky install .husky",
     "postinstall": "tsc",
     "heroku-prepare": ""
   },
