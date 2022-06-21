@@ -9,9 +9,7 @@
     "build:dev": "tsc --watch",
     "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
     "lint": "eslint ./src/",
-    "lint:fix": "eslint ./src/ --fix",
-    "prepare": "husky install",
-    "heroku-prepare": ""
+    "lint:fix": "eslint ./src/ --fix"
   },
   "repository": {
     "type": "git",
