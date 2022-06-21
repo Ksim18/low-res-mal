@@ -7,7 +7,7 @@
   "description": "MAL-like service with severely cut functionality",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run tsc",
     "start": "node dist/index.js",
     "build:dev": "tsc --watch",
     "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
