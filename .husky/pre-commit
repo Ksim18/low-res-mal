@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+tput setaf 2;
+echo "[Husky]: pre-commit"
+echo "[Husky]: run lint"
+tput sgr0;
+
+npm run lint

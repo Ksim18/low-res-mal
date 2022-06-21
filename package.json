@@ -1,0 +1,39 @@
+{
+  "name": "mal-simple",
+  "version": "1.0.0",
+  "description": "MAL-like service with severely cut functionality",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/src/index.js",
+    "build:dev": "tsc --watch",
+    "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
+    "lint": "eslint ./src/",
+    "lint:fix": "eslint ./src/ --fix",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node-fetch": "^2.6.2",
+    "@types/pg": "^8.6.5",
+    "axios": "^0.27.2",
+    "env-cmd": "^10.1.0",
+    "fastify": "^3.29.0",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.36",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-jest": "^26.4.6",
+    "fastify": "^3.29.0",
+    "husky": "^8.0.1"
+  }
+}
