@@ -59,7 +59,7 @@ export function constructUpdateQueryStringBasedOnParams(
     columnValues.push(data.searchBy[i]);
     counter++;
     updateRecordQueryString += `$${counter} and`;
-    columnValues.push(data.value[i].toString());
+    columnValues.push(data.value[i]);
     counter++;
   }
   updateRecordQueryString = updateRecordQueryString.substring(
