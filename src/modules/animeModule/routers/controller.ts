@@ -19,7 +19,7 @@ export const createAnime = async (
       req.body.title.length < 4 ||
       req.body.studio.length > 16 ||
       req.body.studio.length < 6 ||
-      (req.body.startYear && req.body.endYear && Date.parse(req.body.startYear) > Date.parse(req.body.endYear)) ||
+      //(req.body.startYear && req.body.endYear && Date.parse(req.body.startYear) > Date.parse(req.body.endYear)) ||
       req.body.avgScore > 10 ||
       req.body.avgScore < 0
     ) {
@@ -79,7 +79,7 @@ export const updateAnime = async (
     if (
       (req.body.newTitle && (req.body.newTitle.length > 50 || req.body.newTitle.length < 4)) ||
       (req.body.newStudio && (req.body.newStudio.length > 16 || req.body.newStudio.length < 6)) ||
-      (req.body.newStartYear && req.body.newEndYear && Date.parse(req.body.newStartYear) > Date.parse(req.body.newEndYear)) ||
+      //(req.body.newStartYear && req.body.newEndYear && Date.parse(req.body.newStartYear) > Date.parse(req.body.newEndYear)) ||
       (req.body.newAvgScore && (req.body.newAvgScore > 10 || req.body.newAvgScore < 0))
     ) {
       rep.status(400).send("Invalid data format");
