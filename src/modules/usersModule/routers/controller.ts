@@ -195,13 +195,11 @@ export const updateAnimeListRecord = async (
       {
         tableName: "anime_list",
         columnObject: {
-          user_id: req.body.userId,
-          title_id: req.body.titleId,
           score: req.body.newScore,
           progress: req.body.newProgress
         },
-        searchBy: ["score", "progress"],
-        value: [req.body.newScore, req.body.newProgress]
+        searchBy: ["title_id", "user_id"],
+        value: [req.body.titleId, req.body.userId]
       }
     );
     if (record.error) {
