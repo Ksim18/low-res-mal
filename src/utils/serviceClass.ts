@@ -38,6 +38,7 @@ class ServiceClass {
     let { queryString, valuesArray } =
       constructUpdateQueryStringBasedOnParams(data);
     console.log(valuesArray);
+    console.log(queryString);
     return await DBHelper.executePgQuery({
       query: queryString,
       values: valuesArray,
