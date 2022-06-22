@@ -54,8 +54,9 @@ export function constructUpdateQueryStringBasedOnParams(
     0,
     updateRecordQueryString.length - 2
   );
+  updateRecordQueryString+= ` WHERE`;
   for (let i = 0; i < data.searchBy.length; i++) {
-    updateRecordQueryString += ` WHERE ${data.searchBy[i]} = `;
+    updateRecordQueryString += ` ${data.searchBy[i]} = `;
     updateRecordQueryString += `$${counter} and`;
     columnValues.push(data.value[i]);
     counter++;
