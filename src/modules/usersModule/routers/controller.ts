@@ -94,7 +94,7 @@ export const updateUser = async (
           age: req.body.newAge,
           city: req.body.newCity
         },
-        searchBy: ["user_id"],
+        searchBy: ["id"],
         value: [req.body.userId]
       }
     );
