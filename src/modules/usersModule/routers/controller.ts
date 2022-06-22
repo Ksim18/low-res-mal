@@ -198,7 +198,7 @@ export const updateAnimeListRecord = async (
           score: req.body.newScore,
           progress: req.body.newProgress
         },
-        searchBy: ["title_id", "user_id"],
+        searchBy: [`title_id`, `user_id`],
         value: [req.body.titleId, req.body.userId]
       }
     );

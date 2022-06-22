@@ -44,7 +44,7 @@ export function constructUpdateQueryStringBasedOnParams(
   Object.keys(data.columnObject).forEach((columnKey: string) => {
     let tempColumnValue: any = data.columnObject[columnKey];
     if (tempColumnValue !== undefined) {
-      updateRecordQueryString += `'${columnKey}' = $${counter}, `;
+      updateRecordQueryString += `${columnKey} = $${counter}, `;
       columnValues.push(tempColumnValue);
       counter += 1;
     }
