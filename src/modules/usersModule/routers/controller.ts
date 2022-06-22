@@ -76,12 +76,12 @@ export const updateUser = async (
 ) => {
   try {
     if (
-      req.body.newUsername.length > 20 ||
-      req.body.newUsername.length < 4 ||
-      (req.body.newPassword && req.body.newPassword.length > 16) ||
-      (req.body.newPassword && req.body.newPassword.length < 6) ||
-      (req.body.newAge && req.body.newAge > 99) ||
-      (req.body.newCity && (req.body.newCity.length < 4 || req.body.newCity.length > 20))
+        (req.body.newUsername && req.body.newUsername.length > 20) ||
+        (req.body.newUsername && req.body.newUsername.length < 4) ||
+        (req.body.newPassword && req.body.newPassword.length > 16) ||
+        (req.body.newPassword && req.body.newPassword.length < 6) ||
+        (req.body.newAge && req.body.newAge > 99) ||
+        (req.body.newCity && (req.body.newCity.length < 4 || req.body.newCity.length > 20))
     ) {
       rep.status(400).send("Invalid data format");
     }
