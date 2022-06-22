@@ -34,7 +34,7 @@ interface RequestGenericInterfaceReadUser {
 interface RequestGenericInterfaceUpdateUser {
   Body: {
     userId: number;
-    newUsername: string;
+    newUsername?: string;
     newAge?: number;
     newPassword?: string;
     newCity?: string;
