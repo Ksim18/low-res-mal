@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import ServiceClass from "../../../utils/serviceClass";
+import ServiceClass from "../../../dataSources/knex.utils/serviceClass";
 import {
   RouteGenericInterfaceAnime,
   RouteGenericInterfaceGetAnime,

@@ -17,7 +17,6 @@ class ServiceClass {
   async createRecord(data: createRecordType) {
     let { queryString, valuesArray } =
       constructCreateQueryStringBasedOnParams(data);
-    console.log(valuesArray);
     return await DBHelper.executePgQuery({
       query: queryString,
       values: valuesArray,
