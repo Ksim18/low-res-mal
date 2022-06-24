@@ -27,7 +27,7 @@ export const createUser = async (
     ) {
       return rep.status(400).send("Invalid data format");
     }
-    const user = ServiceClass.createRecord(
+    const user = await ServiceClass.createRecord(
       {
         tableName: "users",
         columnObject: {
