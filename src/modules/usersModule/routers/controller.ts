@@ -38,6 +38,7 @@ export const createUser = async (
         }
       }
     );
+    console.log(JSON.stringify(user));
 
     return rep.status(200).send(user);
   } catch (e) {
