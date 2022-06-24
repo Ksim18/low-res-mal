@@ -16,9 +16,11 @@ class ServiceClass {
 
   }
   getRecord(data: readRecordType): QueryBuilder{
-    return knexCon(data.tableName)
-      .select().where(data.searchBy, data.value);
+    const query = knexCon(data.tableName).select().where(data.searchBy, data.value);
+    console.log(query.toString());
+    return query;
   }
+
   updateRecord(data: updateRecordType){
     return knexCon(data.tableName)
       .where(() => {
