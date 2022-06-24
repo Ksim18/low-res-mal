@@ -22,6 +22,8 @@ class ServiceClass {
   }
 
   updateRecord(data: updateRecordType){
+    console.log(data.searchBy);
+    console.log(data.value);
     return knexCon(data.tableName)
       .where(() => {
         const chain = [];
