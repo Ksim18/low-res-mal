@@ -81,7 +81,7 @@ export const updateUser = async (
     ) {
       return rep.status(400).send("Invalid data format");
     }
-    const user = ServiceClass.updateRecord(
+    const user = await ServiceClass.updateRecord(
       {
         tableName: "users",
         columnObject: {
@@ -105,7 +105,7 @@ export const deleteUser = async (
   rep: FastifyReply
 ):Promise<FastifyReply> => {
   try {
-    const user = ServiceClass.deleteRecord(
+    const user = await ServiceClass.deleteRecord(
       {
         tableName: "users",
         searchBy: ["username"],
@@ -130,7 +130,7 @@ export const createAnimeListRecord = async (
     ) {
       return rep.status(400).send("Invalid data format");
     }
-    const record = ServiceClass.createRecord(
+    const record = await ServiceClass.createRecord(
       {
         tableName: "anime_list",
         columnObject: {
@@ -152,7 +152,7 @@ export const readAnimeListRecord = async (
   rep: FastifyReply
 ):Promise<FastifyReply> => {
   try {
-    const records = ServiceClass.getRecord(
+    const records = await ServiceClass.getRecord(
       {
         tableName: "anime_list",
         searchBy: "user_id",
@@ -176,7 +176,7 @@ export const updateAnimeListRecord = async (
     ) {
       return rep.status(400).send("Invalid data format");
     }
-    const record = ServiceClass.updateRecord(
+    const record = await ServiceClass.updateRecord(
       {
         tableName: "anime_list",
         columnObject: {
@@ -198,7 +198,7 @@ export const deleteAnimeListRecord = async (
   rep: FastifyReply
 ):Promise<FastifyReply> => {
   try {
-    const record = ServiceClass.deleteRecord(
+    const record = await ServiceClass.deleteRecord(
       {
         tableName: "anime_list",
         searchBy: ["user_id", "title_id"],

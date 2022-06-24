@@ -55,7 +55,7 @@ export const readAnime = async (
 ): Promise<FastifyReply> => {
   try {
     console.log(req.params);
-    const anime = ServiceClass.getRecord(
+    const anime = await ServiceClass.getRecord(
       {
         tableName: "anime",
         searchBy: "title",
@@ -82,7 +82,7 @@ export const updateAnime = async (
     ) {
       rep.status(400).send("Invalid data format");
     }
-    const anime = ServiceClass.updateRecord(
+    const anime = await ServiceClass.updateRecord(
       {
         tableName: "anime",
         columnObject: {
@@ -110,7 +110,7 @@ export const deleteAnime = async (
   rep: FastifyReply
 ): Promise<FastifyReply> => {
   try {
-    const anime = ServiceClass.deleteRecord(
+    const anime = await ServiceClass.deleteRecord(
       {
         tableName: "anime",
         searchBy: ["title"],
