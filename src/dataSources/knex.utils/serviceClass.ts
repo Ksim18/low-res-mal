@@ -11,7 +11,7 @@ import QueryBuilder = knex.QueryBuilder;
 
 class ServiceClass {
   createRecord(data: createRecordType): QueryBuilder {
-    return knexCon(data.tableName).insert(data.columnObject);
+    return knexCon(data.tableName).returning(Object.keys(data.columnObject)).insert(data.columnObject);
 
 
   }
