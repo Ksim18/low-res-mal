@@ -30,7 +30,7 @@ class ServiceClass {
         }
         return Object.fromEntries(chain);
       })
-      .insert(data.columnObject);
+      .update(data.columnObject);
   }
   deleteRecord(data: deleteRecordType): QueryBuilder{
     return knexCon.where(() => {
