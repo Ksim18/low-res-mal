@@ -24,7 +24,7 @@ class ServiceClass {
   updateRecord(data: updateRecordType){
     console.log(data.searchBy);
     console.log(data.value);
-    return knexCon(data.tableName)
+    const query = knexCon(data.tableName)
       .where(() => {
         const chain = [];
         for(let i=0; i<data.value.length; i++){
@@ -34,6 +34,8 @@ class ServiceClass {
         return Object.fromEntries(chain);
       })
       .update(data.columnObject);
+    console.log(query.toString());
+    return query;
   }
   deleteRecord(data: deleteRecordType): QueryBuilder{
     return knexCon.where(() => {
