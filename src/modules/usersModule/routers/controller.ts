@@ -51,14 +51,14 @@ export const readUser = async (
   rep: FastifyReply
 ):Promise<FastifyReply> => {
   try {
-    const user = ServiceClass.getRecord(
+    const user = await ServiceClass.getRecord(
       {
         tableName: "users",
         searchBy: "username",
         value: req.params.username
       }
     );
-    console.log(req.params);
+    console.log(JSON.stringify(user));
 
     return rep.status(200).send(user);
   } catch (e) {
