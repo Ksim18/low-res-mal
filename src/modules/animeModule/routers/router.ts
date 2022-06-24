@@ -1,5 +1,5 @@
 import { RouteOptions } from "@fastify/websocket";
-import { FastifySchema, RegisterOptions, RouteHandler } from "fastify";
+import { RegisterOptions, RouteHandler } from "fastify";
 import * as controller from "./controller";
 
 export const opts: RegisterOptions = {

@@ -2,7 +2,6 @@ import {
   RequestBodyDefault,
   RequestHeadersDefault,
   RequestQuerystringDefault,
-  RequestGenericInterface,
   RequestParamsDefault
 } from "fastify";
 import { ReplyGenericInterface } from "fastify/types/reply";

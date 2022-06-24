@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import { IncomingMessage, Server as httpServer, ServerResponse } from "http";
 import { plugin, pluginSet, router, routerSet } from "./serverTypes";
-import { initLocalDatabasesIfNotExists } from "../dataSources/initLocalDatabases";
+//import { initLocalDatabasesIfNotExists } from "../dataSources/initLocalDatabases";
 import { RouteOptions } from "@fastify/websocket";
 
 export class Server {
@@ -21,11 +21,8 @@ export class Server {
     this.serverInstance = server;
   }
 
-  public registerPlugin(plugin: plugin) {
-    this.setOfPlugins.push(plugin);
-  }
 
-  public registerRouter(router: router) {
+  public registerRouter(router: router):void {
     this.setOfRouters.push(router);
   }
 
@@ -37,7 +34,7 @@ export class Server {
 
   private registerRouters() {
     this.setOfRouters.forEach((router: router) => {
-      let { routes, opts } = router;
+      const { routes, opts } = router;
       const plugin = (
         server: FastifyInstance,
         opts: FastifyPluginOptions,
@@ -50,16 +47,16 @@ export class Server {
     });
   }
 
-  public registerApi() {
+  public registerApi():void {
     this.registerPlugins();
     this.registerRouters();
   }
 
-  public async initLocalDatabases() {
-    await initLocalDatabasesIfNotExists();
-  }
+  // public async initLocalDatabases() {
+  //   await initLocalDatabasesIfNotExists();
+  // }
 
-  public async initServer(port: string, host: string) {
+  public async initServer(port: string, host: string):Promise<void> {
     await this.serverInstance.listen(port, host);
   }
 }

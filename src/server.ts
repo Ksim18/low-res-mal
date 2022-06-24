@@ -1,4 +1,4 @@
-import fastify, { FastifyPluginCallback, FastifyPluginOptions } from "fastify";
+import fastify from "fastify";
 import { Server } from "./server/server";
 import * as usersModule from "./modules/usersModule/routers";
 import * as animeModule from "./modules/animeModule/routers";

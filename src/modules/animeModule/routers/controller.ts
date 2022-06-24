@@ -12,7 +12,7 @@ import { fetchFiltered } from "../utils/MALRequests";
 export const createAnime = async (
   req: FastifyRequest<RouteGenericInterfaceAnime>,
   rep: FastifyReply
-) => {
+): Promise<FastifyReply> => {
   try {
     if (
       req.body.title.length > 50 ||
@@ -23,8 +23,9 @@ export const createAnime = async (
       req.body.avgScore > 10 ||
       req.body.avgScore < 0
     ) {
-      rep.status(400).send("Invalid data format");
+      return rep.status(400).send("Invalid data format");
     }
+
     const anime = await ServiceClass.createRecord(
       {
         tableName: "anime",
@@ -39,12 +40,11 @@ export const createAnime = async (
         }
       }
     );
-    if (anime.error) {
-      rep.status(400).send(JSON.stringify(anime.error.message));
-    }
-    rep.status(200).send(anime.rows);
+    return rep.status(200).send(anime);
+
+
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
@@ -52,29 +52,27 @@ export const createAnime = async (
 export const readAnime = async (
   req: FastifyRequest<RouteGenericInterfaceGetAnime>,
   rep: FastifyReply
-) => {
+): Promise<FastifyReply> => {
   try {
     console.log(req.params);
-    const anime = await ServiceClass.getRecord(
+    const anime = ServiceClass.getRecord(
       {
         tableName: "anime",
         searchBy: "title",
         value: req.params.title
       }
     );
-    if (anime.error) {
-      rep.status(400).send(JSON.stringify(anime.error.message));
-    }
-    rep.status(200).send(anime.rows);
+
+    return rep.status(200).send(anime);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const updateAnime = async (
   req: FastifyRequest<RouteGenericInterfaceUpdateAnime>,
   rep: FastifyReply
-) => {
+): Promise<FastifyReply> => {
   try {
     if (
       (req.body.newTitle && (req.body.newTitle.length > 50 || req.body.newTitle.length < 4)) ||
@@ -84,7 +82,7 @@ export const updateAnime = async (
     ) {
       rep.status(400).send("Invalid data format");
     }
-    const anime = await ServiceClass.updateRecord(
+    const anime = ServiceClass.updateRecord(
       {
         tableName: "anime",
         columnObject: {
@@ -100,39 +98,34 @@ export const updateAnime = async (
         value: [req.body.title]
       }
     );
-    if (anime.error) {
-      rep.status(400).send(JSON.stringify(anime.error.message));
-    }
-    rep.status(200).send(anime.rows);
+
+    return rep.status(200).send(anime);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const deleteAnime = async (
   req: FastifyRequest<RouteGenericInterfaceDeleteAnime>,
   rep: FastifyReply
-) => {
+): Promise<FastifyReply> => {
   try {
-    const anime = await ServiceClass.deleteRecord(
+    const anime = ServiceClass.deleteRecord(
       {
         tableName: "anime",
         searchBy: ["title"],
         value: [req.params.title]
       }
     );
-    if (anime.error) {
-      rep.status(400).send(JSON.stringify(anime.error.message));
-    }
-    rep.status(200).send(anime.rows);
+    return rep.status(200).send(anime);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 export const fetchFilteredAnime = async (
   req: FastifyRequest<RouteGenericInterfaceFetchFiltered>,
   rep: FastifyReply
-) => {
+): Promise<FastifyReply> => {
   try {
     const filtered = await fetchFiltered(
       {
@@ -143,13 +136,9 @@ export const fetchFilteredAnime = async (
         orderBy: req.query.orderBy
       }
     );
-
-    console.log(filtered);
-
-    rep.status(200).send(JSON.stringify(filtered.data));
-
-  } catch (e: any) {
-    rep.status(400).send(e.message);
+    return rep.status(200).send(JSON.stringify(filtered.data));
+  } catch (e) {
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 

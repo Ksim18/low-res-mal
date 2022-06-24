@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios, {AxiosPromise} from "axios";
+import {MALOptions} from "../types/animeTypes";
 
-export const fetchFiltered = async (options: any) => {
+export const fetchFiltered = async (options: MALOptions): Promise<AxiosPromise> => {
   console.log(JSON.stringify(options));
   let query = `https://api.jikan.moe/v4/anime?limit=1`;
   const type = options.type ? `&type=${options.type}` : ``;

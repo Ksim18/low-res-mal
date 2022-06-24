@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import ServiceClass from "../../../utils/serviceClass";
+import ServiceClass from "../../../dataSources/knex.utils/serviceClass";
 import {
   RouteGenericInterfaceUser,
   RouteGenericInterfaceGetUser,
@@ -15,7 +15,7 @@ import {
 export const createUser = async (
   req: FastifyRequest<RouteGenericInterfaceUser>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
     if (
       req.body.username.length > 20 ||
@@ -25,9 +25,9 @@ export const createUser = async (
       (req.body.age && req.body.age > 99) ||
       (req.body.city && (req.body.city.length < 4 || req.body.city.length > 20))
     ) {
-      rep.status(400).send("Invalid data format");
+      return rep.status(400).send("Invalid data format");
     }
-    const user = await ServiceClass.createRecord(
+    const user = ServiceClass.createRecord(
       {
         tableName: "users",
         columnObject: {
@@ -38,12 +38,10 @@ export const createUser = async (
         }
       }
     );
-    if (user.error) {
-      rep.status(400).send(JSON.stringify(user.error.message));
-    }
-    rep.status(200).send(user.rows);
+
+    return rep.status(200).send(user);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
@@ -51,41 +49,39 @@ export const createUser = async (
 export const readUser = async (
   req: FastifyRequest<RouteGenericInterfaceGetUser>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
-    console.log(req.params);
-    const user = await ServiceClass.getRecord(
+    const user = ServiceClass.getRecord(
       {
         tableName: "users",
         searchBy: "username",
         value: req.params.username
       }
     );
-    if (user.error) {
-      rep.status(400).send(JSON.stringify(user.error.message));
-    }
-    rep.status(200).send(user.rows);
+    console.log(req.params);
+
+    return rep.status(200).send(user);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const updateUser = async (
   req: FastifyRequest<RouteGenericInterfaceUpdateUser>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
     if (
-        (req.body.newUsername && req.body.newUsername.length > 20) ||
+      (req.body.newUsername && req.body.newUsername.length > 20) ||
         (req.body.newUsername && req.body.newUsername.length < 4) ||
         (req.body.newPassword && req.body.newPassword.length > 16) ||
         (req.body.newPassword && req.body.newPassword.length < 6) ||
         (req.body.newAge && req.body.newAge > 99) ||
         (req.body.newCity && (req.body.newCity.length < 4 || req.body.newCity.length > 20))
     ) {
-      rep.status(400).send("Invalid data format");
+      return rep.status(400).send("Invalid data format");
     }
-    const user = await ServiceClass.updateRecord(
+    const user = ServiceClass.updateRecord(
       {
         tableName: "users",
         columnObject: {
@@ -98,48 +94,43 @@ export const updateUser = async (
         value: [req.body.userId]
       }
     );
-    if (user.error) {
-      rep.status(400).send(JSON.stringify(user.error.message));
-    }
-    rep.status(200).send(user.rows);
+    return rep.status(200).send(user);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const deleteUser = async (
   req: FastifyRequest<RouteGenericInterfaceDeleteUser>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
-    const user = await ServiceClass.deleteRecord(
+    const user = ServiceClass.deleteRecord(
       {
         tableName: "users",
         searchBy: ["username"],
         value: [req.params.username]
       }
     );
-    if (user.error) {
-      rep.status(400).send(JSON.stringify(user.error.message));
-    }
-    rep.status(200).send(user.rows);
+
+    return rep.status(200).send(user);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const createAnimeListRecord = async (
   req: FastifyRequest<RouteGenericInterfaceAnimeListRecord>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
     if (
       req.body.score > 10 ||
       req.body.score < 0
     ) {
-      rep.status(400).send("Invalid data format");
+      return rep.status(400).send("Invalid data format");
     }
-    const record = await ServiceClass.createRecord(
+    const record = ServiceClass.createRecord(
       {
         tableName: "anime_list",
         columnObject: {
@@ -150,48 +141,42 @@ export const createAnimeListRecord = async (
         }
       }
     );
-    if (record.error) {
-      rep.status(400).send(JSON.stringify(record.error.message));
-    }
-    rep.status(200).send(record.rows);
+    return rep.status(200).send(record);
   } catch (e) {
-    rep.status(404).send(JSON.stringify(e));
+    return rep.status(404).send(JSON.stringify(e));
   }
 };
 
 export const readAnimeListRecord = async (
   req: FastifyRequest<RouteGenericInterfaceGetAnimeListRecord>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
-    const records = await ServiceClass.getRecord(
+    const records = ServiceClass.getRecord(
       {
         tableName: "anime_list",
         searchBy: "user_id",
         value: req.params.userId
       }
     );
-    if (records.error) {
-      rep.status(400).send(JSON.stringify(records.error.message));
-    }
-    rep.status(200).send(records.rows);
+    return rep.status(200).send(records);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const updateAnimeListRecord = async (
   req: FastifyRequest<RouteGenericInterfaceUpdateAnimeListRecord>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
     if (
       req.body.newScore > 10 ||
       req.body.newScore < 0
     ) {
-      rep.status(400).send("Invalid data format");
+      return rep.status(400).send("Invalid data format");
     }
-    const record = await ServiceClass.updateRecord(
+    const record = ServiceClass.updateRecord(
       {
         tableName: "anime_list",
         columnObject: {
@@ -202,33 +187,27 @@ export const updateAnimeListRecord = async (
         value: [req.body.titleId, req.body.userId]
       }
     );
-    if (record.error) {
-      rep.status(400).send(JSON.stringify(record.error.message));
-    }
-    rep.status(200).send(record.rows);
+    return rep.status(200).send(record);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
 export const deleteAnimeListRecord = async (
   req: FastifyRequest<RouteGenericInterfaceDeleteAnimeListRecord>,
   rep: FastifyReply
-) => {
+):Promise<FastifyReply> => {
   try {
-    const record = await ServiceClass.deleteRecord(
+    const record = ServiceClass.deleteRecord(
       {
         tableName: "anime_list",
         searchBy: ["user_id", "title_id"],
         value: [req.body.userId, req.body.titleId]
       }
     );
-    if (record.error) {
-      rep.status(400).send(JSON.stringify(record.error.message));
-    }
-    rep.status(200).send(record.rows);
+    return rep.status(200).send(record);
   } catch (e) {
-    rep.status(400).send(JSON.stringify(e));
+    return rep.status(400).send(JSON.stringify(e));
   }
 };
 
