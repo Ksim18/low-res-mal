@@ -30,6 +30,7 @@ class ServiceClass {
         for(let i=0; i<data.value.length; i++){
           chain.push([data.searchBy[i], data.value[i]]);
         }
+        console.log(chain);
         return Object.fromEntries(chain);
       })
       .update(data.columnObject);
