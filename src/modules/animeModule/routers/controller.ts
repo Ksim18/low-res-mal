@@ -106,7 +106,7 @@ export const updateAnime = async (
 };
 
 export const deleteAnime = async (
-  req: FastifyRequest<RouteGenericInterfaceDeleteAnime>,
+  req,
   rep: FastifyReply
 ): Promise<FastifyReply> => {
   try {
