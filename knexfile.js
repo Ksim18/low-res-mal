@@ -5,14 +5,14 @@
  */
 module.exports = {
 
-  development: {
-    client: "pg",
-    connection: {
-      database: "testBD",
-      user: "user",
-      password: "123456"
-    },
-  },
+  // development: {
+  //   client: "pg",
+  //   connection: {
+  //     database: "testBD",
+  //     user: "user",
+  //     password: "123456"
+  //   },
+  // },
 
   staging: {
     client: 'postgresql',
