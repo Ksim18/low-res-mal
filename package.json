@@ -13,7 +13,8 @@
     "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
     "lint": "eslint ./src/",
     "lint:fix": "eslint ./src/ --fix",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
