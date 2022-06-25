@@ -18,7 +18,7 @@ export const routes: RouteOptions[] = [
     handler: <RouteHandler>controller.readUser
   },
   {
-    method: "POST",
+    method: "PUT",
     url: "/updateUser",
     handler: <RouteHandler>controller.updateUser
   },
@@ -38,7 +38,7 @@ export const routes: RouteOptions[] = [
     handler: <RouteHandler>controller.readAnimeListRecord
   },
   {
-    method: "POST",
+    method: "PUT",
     url: "/changeList",
     handler: <RouteHandler>controller.updateAnimeListRecord
   },

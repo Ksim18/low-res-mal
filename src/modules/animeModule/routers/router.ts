@@ -18,7 +18,7 @@ export const routes: RouteOptions[] = [
     handler: <RouteHandler>controller.readAnime
   },
   {
-    method: "POST",
+    method: "PUT",
     url: "/updateAnime",
     handler: <RouteHandler>controller.updateAnime
   },

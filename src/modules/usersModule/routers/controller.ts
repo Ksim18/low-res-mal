@@ -82,6 +82,7 @@ export const updateUser = async (
     ) {
       return rep.status(400).send("Invalid data format");
     }
+    console.log(JSON.stringify(req.body));
     const user = await ServiceClass.updateRecord(
       {
         tableName: "users",

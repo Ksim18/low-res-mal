@@ -22,29 +22,31 @@ class ServiceClass {
   }
 
   updateRecord(data: updateRecordType){
-    console.log(data.searchBy);
-    console.log(data.value);
+    console.log(JSON.stringify(data));
+    const makeCondition = () => {
+      const chain = [];
+      for(let i=0; i<data.value.length; i++){
+        chain.push([data.searchBy[i], data.value[i]]);
+      }
+      console.log("obj=", Object.fromEntries(chain));
+      return Object.fromEntries(chain);
+    };
     const query = knexCon(data.tableName)
-      .where(() => {
-        const chain = [];
-        for(let i=0; i<data.value.length; i++){
-          chain.push([data.searchBy[i], data.value[i]]);
-        }
-        console.log(chain);
-        return Object.fromEntries(chain);
-      })
+      .returning(Object.keys(data.columnObject))
+      .where(makeCondition())
       .update(data.columnObject);
     console.log(query.toString());
     return query;
   }
   deleteRecord(data: deleteRecordType): QueryBuilder{
-    return knexCon.where(() => {
+    const makeCondition = () => {
       const chain = [];
       for(let i=0; i<data.value.length; i++){
         chain.push([data.searchBy[i], data.value[i]]);
       }
       return Object.fromEntries(chain);
-    }).del();
+    };
+    return knexCon(data.tableName).returning(data.searchBy).where(makeCondition()).del();
   }
 }
 
