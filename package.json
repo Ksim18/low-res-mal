@@ -10,7 +10,7 @@
     "build": "npm run tsc",
     "start": "env-cmd -f env/dev.env node dist/index.js",
     "build:dev": "tsc --watch",
-    "start:dev": "env-cmd -f env/dev.env node ./dist/index.js",
+    "start:dev": "env-cmd -f env/local.env node ./dist/index.js",
     "lint": "eslint ./src/",
     "lint:fix": "eslint ./src/ --fix",
     "tsc": "tsc"
