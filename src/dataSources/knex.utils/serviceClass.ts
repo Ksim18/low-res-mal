@@ -11,6 +11,7 @@ import QueryBuilder = knex.QueryBuilder;
 
 class ServiceClass {
   createRecord(data: createRecordType): QueryBuilder {
+    console.log(process.env.DB_USER);
     return knexCon(data.tableName).returning(Object.keys(data.columnObject)).insert(data.columnObject);
 
 
